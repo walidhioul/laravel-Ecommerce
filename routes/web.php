@@ -19,13 +19,14 @@ Route::prefix('admin')
     ->controller(AdminController::class)
     ->group(function () {
         Route::get('/dashboard', 'index')->name('admin');
-    });
+        Route::get('/settings', 'setting')->name('admin.setting');
+        Route::get('/manage/users', 'manage_user')->name('admin.manager.user');
+        Route::get('/manage/stores', 'manage_stores')->name('admin.manager.stores');
+        Route::get('/cart/history', 'cart_history')->name('admin.cart.history');
+        Route::get('/order/history', 'order_history')->name('admin.order.history');
 
-/*
-Route::get('/admin/dashboard', function () {
-    return view('admin');
-})->middleware(['auth', 'verified' ,'rolemanager:admin'])->name('admin');
-*/
+
+    });
 
 Route::get('/vendor/dashboard', function () {
     return view('vendor');
@@ -40,3 +41,8 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+/*notes 
+add product ... routes of admin (video n°6)
+*/
