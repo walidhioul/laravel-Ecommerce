@@ -5,15 +5,15 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class SubCategoryController extends Controller
 {
     public function index()
     {
-        return view('admin.category.create');
+        return view('admin.sub_category.create');
     }
 
     public function manage()
     {
-        return view('admin.category.manage');
+        return view('admin.sub_category.manage');
     }
 }

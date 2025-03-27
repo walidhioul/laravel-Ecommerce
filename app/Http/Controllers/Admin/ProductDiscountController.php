@@ -5,15 +5,15 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class ProductDiscountController extends Controller
 {
     public function index()
     {
-        return view('admin.category.create');
+        return view('admin.discount.create');
     }
 
     public function manage()
     {
-        return view('admin.category.manage');
+        return view('admin.discount.manage');
     }
 }
