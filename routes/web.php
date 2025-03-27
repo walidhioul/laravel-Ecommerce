@@ -7,6 +7,9 @@ use App\Http\Controllers\Admin\ProductDiscountController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\seller\SellerProductController;
+use App\Http\Controllers\seller\SellerStoreController;
+use App\Http\Controllers\SellerController;
 use App\Http\Middleware\RoleManager;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +21,7 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified' ,'rolemanager:customer'])->name('dashboard');
+
 //admin panel routes 
 Route::prefix('admin')
     ->middleware(['auth', 'verified','rolemanager:admin'])
@@ -60,11 +64,28 @@ Route::prefix('admin')
 
     });
 
-Route::get('/vendor/dashboard', function () {
-    return view('vendor');
-})->middleware(['auth', 'verified' ,'rolemanager:vendor'])->name('vendor');
+//seller panel routes 
+Route::prefix('vendor')
+    ->middleware(['auth', 'verified','rolemanager:vendor'])
+    ->group(function () {
 
+        Route::controller(SellerController::class)->group(function(){           
+            Route::get('/dashboard', 'index')->name('vendor');
+            Route::get('/orderhistory', 'orderhistory')->name('vendor.orderhistory');
+        });
 
+        Route::controller(SellerStoreController::class)->group(function(){           
+            Route::get('/store/create', 'index')->name('vendor.store.create');
+            Route::get('/store/manage', 'manage')->name('vendor.store.manage');
+
+        });
+
+        Route::controller(SellerProductController::class)->group(function(){           
+            Route::get('/product/create', 'index')->name('vendor.product.create');
+            Route::get('/product/manage', 'manage')->name('vendor.product.manage');
+        });
+
+    });
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -76,5 +97,5 @@ require __DIR__.'/auth.php';
 
 
 /*notes 
-add product ... routes of admin (video n°6)
+
 */
