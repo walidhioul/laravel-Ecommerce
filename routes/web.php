@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductDiscountController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryMasterController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\seller\SellerProductController;
 use App\Http\Controllers\seller\SellerStoreController;
@@ -18,9 +20,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified' ,'rolemanager:customer'])->name('dashboard');
 
 //admin panel routes 
 Route::prefix('admin')
@@ -61,8 +60,18 @@ Route::prefix('admin')
             Route::get('/discount/manage', 'manage')->name('discount.manage'); 
 });
         
+         Route::controller(CategoryMasterController::class)->group(function(){
+            Route::post('/store/category', 'storecategory')->name('store.category');
+            Route::get('category/{id}', 'editcategory')->name('edit.category');
+            Route::put('category/update/{id}', 'updatecategory')->name('update.category');
+            Route::delete('category/delete/{id}', 'deletecategory')->name('delete.category');
+
+
+             
+}); 
 
     });
+    
 
 //seller panel routes 
 Route::prefix('vendor')
@@ -83,6 +92,21 @@ Route::prefix('vendor')
         Route::controller(SellerProductController::class)->group(function(){           
             Route::get('/product/create', 'index')->name('vendor.product.create');
             Route::get('/product/manage', 'manage')->name('vendor.product.manage');
+        });
+
+    });
+
+
+//customer panel routes
+Route::prefix('customer')
+    ->middleware(['auth', 'verified','rolemanager:customer'])
+    ->group(function () {
+
+        Route::controller(CustomerController::class)->group(function(){           
+            Route::get('/dashboard', 'index')->name('customer');
+            Route::get('/history', 'history')->name('customer.history');
+            Route::get('/payment', 'payment')->name('customer.payment');
+            Route::get('/affilate', 'affilate')->name('customer.affilate');
         });
 
     });

@@ -25,11 +25,12 @@
     </div>
 @endif
         
-        <form action="" method="POST">
+        <form action="{{route('update.category',$category_info->id)}}" method="POST">
             @csrf
+            @method('PUT')
             <label for="category_name">Give name of your category</label>         
-            <input type="text" name="category_name" class="form-control" placeholder="Computer" required>
-            <button type="submit" class="btn btn-primary mt-3">Create Category</button>
+            <input type="text" name="category_name" class="form-control" value="{{$category_info->category_name}}" required>
+            <button type="submit" class="btn btn-primary mt-3">Edit Category</button>
             
         </form>
         
