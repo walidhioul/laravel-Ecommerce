@@ -12,6 +12,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\seller\SellerProductController;
 use App\Http\Controllers\seller\SellerStoreController;
 use App\Http\Controllers\SellerController;
+use App\Http\Controllers\SubCategoryMasterController;
 use App\Http\Middleware\RoleManager;
 use Illuminate\Support\Facades\Route;
 
@@ -60,18 +61,22 @@ Route::prefix('admin')
             Route::get('/discount/manage', 'manage')->name('discount.manage'); 
 });
         
-         Route::controller(CategoryMasterController::class)->group(function(){
+        Route::controller(CategoryMasterController::class)->group(function(){
             Route::post('/store/category', 'storecategory')->name('store.category');
             Route::get('category/{id}', 'editcategory')->name('edit.category');
             Route::put('category/update/{id}', 'updatecategory')->name('update.category');
-            Route::delete('category/delete/{id}', 'deletecategory')->name('delete.category');
-
-
-             
+            Route::delete('category/delete/{id}', 'deletecategory')->name('delete.category');     
 }); 
+        
+        Route::controller(SubCategoryMasterController::class)->group(function(){
+            Route::post('/store/subcategory', 'storesubcategory')->name('store.subcategory');
+            Route::get('subcategory/{id}', 'editsubcategory')->name('edit.subcategory');
+            Route::put('subcategory/update/{id}', 'updatesubcategory')->name('update.subcategory');
+            Route::delete('subcategory/delete/{id}', 'deletesubcategory')->name('delete.subcategory');     
+});
 
     });
-    
+
 
 //seller panel routes 
 Route::prefix('vendor')
