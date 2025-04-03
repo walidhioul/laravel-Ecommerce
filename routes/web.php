@@ -51,9 +51,14 @@ Route::prefix('admin')
             Route::get('/product/review/manage', 'review_manage')->name('product.review.manage'); 
 });
 
-        Route::controller(ProductAttributeController::class)->group(function(){
-            Route::get('/productattribute/create', 'index')->name('productattribute.create');
-            Route::get('/productattribute/manage', 'manage')->name('productattribute.manage'); 
+        Route::controller(ProductAttributeController::class)->group(function(){           
+            Route::get('/product/attribute/create', 'index')->name('product.attribute.create');
+            Route::get('/product/attribute/manage', 'manage')->name('product.attribute.manage'); 
+            Route::post('/defaultattribute/create', 'create')->name('attribute.create');
+            Route::get('/defaultattribute/manage', 'show')->name('attribute.show');
+            Route::get('/defaultattribute/edit/{id}', 'edit')->name('attribute.edit');
+            Route::put('/defaultattribute/update/{id}', 'update')->name('attribute.update');
+            Route::delete('/defaultattribute/delete/{id}', 'destroy')->name('attribute.delete');
 });
 
         Route::controller(ProductDiscountController::class)->group(function(){

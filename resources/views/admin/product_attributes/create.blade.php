@@ -3,7 +3,7 @@
 @section('admin_layout')
 <div class="card">
     <div class="card-header">
-        <h5 class="card-title mb-0">Create Category</h5>
+        <h5 class="card-title mb-0">Create attribute</h5>
     </div>
     <div class="card-body">
         @if ($errors->any())
@@ -25,13 +25,14 @@
     </div>
 @endif
         
-        <form action="{{route('store.category')}}" method="POST">
+        <form action="{{route('attribute.create')}}" method="POST">
             @csrf
-            <label for="category_name">Give name of your category</label>         
-            <input type="text" name="category_name" class="form-control" placeholder="Computer" required>
-            <button type="submit" class="btn btn-primary mt-3">Create Category</button>
-            
+            <label for="attribute_value">Give name of your Attribute</label>         
+            <input type="text" name="attribute_value" class="form-control" placeholder="XL" required>      
+            <button type="submit" class="btn btn-primary mt-3">Create Attribute</button> 
         </form>
+
+        
         
        
     </div>

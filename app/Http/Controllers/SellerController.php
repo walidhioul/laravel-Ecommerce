@@ -8,7 +8,7 @@ class SellerController extends Controller
 {
     public function index()
     {
-        return view('seller.dashbord');
+        return view('seller.dashboard');
         
     }
 

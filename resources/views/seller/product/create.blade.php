@@ -5,5 +5,7 @@ Dashbord
 @endsection
 
 @section('seller_layout')
-Dashbord
+
+<livewire:category-subcategory/>
+
 @endsection

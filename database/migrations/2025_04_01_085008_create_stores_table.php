@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('default_attributes', function (Blueprint $table) {
+        Schema::create('stores', function (Blueprint $table) {
             $table->id();
-            $table->string('attribute_value');          
-            $table->unsignedBigInteger('user_id'); 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('store_name');
+            $table->string('slug');
+            $table->longText('description'); 
+            $table->unsignedBigInteger('user_id'); // Foreign key to users table
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('default_attributes');
+        Schema::dropIfExists('stores');
     }
 };
