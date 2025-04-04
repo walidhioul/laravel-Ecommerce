@@ -27,16 +27,16 @@ class SellerStoreController extends Controller
         $request->validate([
             'store_name' => 'required|string|max:255',
             'slug' => 'required|string|max:255|unique:stores,slug',
-            'description' => 'required|string',
+            'details' => 'required|string',
         ]);
 
         Store::create([
             'store_name' => $request->store_name,
             'slug' => $request->store_name,
-            'description' => $request->description,
+            'details' => $request->details,
             'user_id' => Auth::user()->id, 
         ]);
 
-        return redirect()->route('seller.store.create')->with('success', 'Store created successfully.');
+        return redirect()->route('vendor.store.create')->with('success', 'Store created successfully.');
     }
 }

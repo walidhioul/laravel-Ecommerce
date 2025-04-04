@@ -36,8 +36,8 @@ store
             <label for="store_name">Give name of your Store</label>         
             <input type="text" name="store_name" class="form-control" placeholder="walid store" required>
 
-            <label for="description">Store Description</label>
-            <textarea name="description" class="form-control" placeholder="" required></textarea>
+            <label for="details">Store description</label>
+            <textarea name="details" class="form-control"  required></textarea>
 
             <label for="slug">Slug</label>
             <input type="text" name="slug" class="form-control" placeholder="walid-store" required>
